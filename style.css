@@ -1,0 +1,84 @@
+/* Import a modern font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* Define color palette */
+:root {
+    --bg-color: #0d1117;
+    --card-bg-color: rgba(33, 37, 41, 0.6);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --text-color: #c9d1d9;
+    --text-glow-color: rgba(110, 223, 206, 0.5);
+    --active-green: #34d399;
+    --font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    min-height: 100vh;
+}
+
+.dashboard-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* Header */
+.header { margin-bottom: 1rem; }
+.logo-text { font-weight: 600; color: white; text-shadow: 0 0 10px var(--text-glow-color); }
+.nav-pills .nav-link { color: var(--text-color); border: 1px solid var(--border-color); margin: 0 5px; transition: all 0.3s ease; }
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link { background-color: var(--active-green); color: white; border-color: var(--active-green); box-shadow: 0 0 15px rgba(52, 211, 153, 0.6); }
+.nav-pills .nav-link:not(.active):hover { background-color: rgba(45, 52, 59, 0.8); border-color: var(--active-green); }
+
+/* Glass Effect Data Cards */
+.data-card { background: var(--card-bg-color); border: 1px solid var(--border-color); border-radius: 12px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); height: 100%; }
+
+/* Custom Form Elements */
+.form-select, .form-control { background-color: #1c2128; color: var(--text-color); border-color: var(--border-color); }
+.form-select:focus, .form-control:focus { background-color: #1c2128; color: var(--text-color); border-color: var(--active-green); box-shadow: 0 0 0 0.25rem rgba(52, 211, 153, 0.25); }
+.form-select-sm, .form-control-sm { font-size: 0.8rem; }
+
+/* Weather Section */
+.weather-value { display: block; font-size: 1.5rem; font-weight: 500; color: white; text-shadow: 0 0 8px var(--text-glow-color); }
+.weather-label { font-size: 0.75rem; color: #8b949e; text-transform: uppercase; }
+.weather-icon { font-size: 1.2rem; color: var(--active-green); margin-right: 5px; }
+
+/* Chart Styles */
+.chart-container { position: relative; width: 100%; height: 100%; min-height: 250px; }
+.chart-legend { font-size: 0.8rem; }
+.chart-legend-item { margin-left: 10px; }
+
+/* KPI Cards */
+.kpi-card { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1rem; text-align: center; }
+.kpi-value { font-size: 2rem; font-weight: 600; color: white; text-shadow: 0 0 10px var(--text-glow-color); }
+.kpi-label { font-size: 0.8rem; color: #8b949e; }
+
+/* Inverter List */
+.inverter-list { max-height: 250px; overflow-y: auto; padding-right: 10px; }
+.inverter-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 0.9rem; }
+.inverter-progress { height: 10px; background-color: #30363d; border-radius: 5px; flex-grow: 1; margin: 0 10px; }
+.inverter-progress-bar { height: 100%; background-color: var(--active-green); border-radius: 5px; transition: width 0.5s ease-in-out; box-shadow: 0 0 10px rgba(52, 211, 153, 0.6); }
+.inverter-value { font-weight: 500; color: white; }
+.inverter-list::-webkit-scrollbar { width: 4px; }
+.inverter-list::-webkit-scrollbar-track { background: transparent; }
+.inverter-list::-webkit-scrollbar-thumb { background: var(--active-green); border-radius: 2px; }
+
+/* Circuit Status */
+.circuit-status { border: 1px solid var(--border-color); padding: 8px; border-radius: 6px; font-size: 0.8rem; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.circuit-status.closed { color: var(--active-green); }
+.circuit-status.open { color: #f87171; }
+.circuit-status i { margin-top: 4px; }
+
+/* [NEW] Gauge Chart Overlay */
+.gauge-container { position: relative; }
+.gauge-text { position: absolute; top: 60%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none; }
+.gauge-power-value { display: block; font-size: 2rem; font-weight: 600; color: white; text-shadow: 0 0 10px var(--text-glow-color); }
+.gauge-irradiance-value { display: block; font-size: 0.9rem; color: #ffcd56; }
+
+/* --- RESPONSIVENESS --- */
+@media (max-width: 576px) {
+    .kpi-value { font-size: 1.5rem; }
+    .logo-text { font-size: 1.2rem; }
+    .nav-pills .nav-link { font-size: 0.8rem; padding: 0.4rem; margin: 0 2px; }
+}
