@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Data Dashboard</title>
+    <meta name="description" content="A dynamic, real-time data dashboard showcasing key performance indicators and analytics with a modern glassmorphism interface.">
+    <meta name="keywords" content="dashboard, analytics, real-time, data visualization, bootstrap, chartjs">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container-fluid dashboard-container">
+        <!-- Header Row -->
+        <header class="row align-items-center main-header">
+            <div class="col-auto d-none d-md-block"><div class="logo-placeholder"></div></div>
+            <div class="col">
+                <nav class="d-none d-lg-flex">
+                    <button class="nav-btn active">Home</button>
+                    <button class="nav-btn"><a class="nav-link" href="../index.html">Sampling</a></button>
+                    <button class="nav-btn"><a class="nav-link" href="#">Quantization</a></button>
+                    <button class="nav-btn"><a class="nav-link" href="#">Charts</a></button>
+                </nav>
+            </div>
+            <div class="col-auto">
+                <div class="d-flex align-items-center">
+                    <div class="refresh-rate me-3">
+                        <label for="refreshRateSelect" class="form-label text-white-50 small mb-0 me-2">Refresh rate</label>
+                        <select id="refreshRateSelect" class="form-select form-select-sm">
+                            <option value="500">250ms</option>
+                            <option value="500" selected>500ms</option>
+                            <option value="1000">1 sec</option>
+                            <option value="2000">2 sec</option>
+                            <option value="5000">5 sec</option>
+                        </select>
+                    </div>
+                    <div class="menu-icon"><span></span><span></span><span></span></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Row -->
+        <div class="row g-4">
+            <!-- Left Column -->
+            <div class="col-xl-3 col-lg-4">
+                <div class="glass-panel mb-4 text-center">
+                    <h6 class="panel-title text-start">Catalog Distribution</h6>
+                    <div class="chart-container" style="height: 150px;"><canvas id="catalogDistributionChart"></canvas></div>
+                    <div id="catalogDistributionText" class="chart-text-below"></div>
+                </div>
+                <div class="glass-panel mb-4">
+                    <h6 class="panel-title">Department</h6>
+                    <!-- Increased container height to allow radar chart to be larger -->
+                    <div class="chart-container" style="height: 220px;"><canvas id="departmentChart"></canvas></div>
+                </div>
+                <div class="glass-panel">
+                    <h6 class="panel-title">Data Sampling</h6>
+                    <div class="chart-container" style="height: 180px;"><canvas id="dataSamplingChart"></canvas></div>
+                </div>
+            </div>
+
+            <!-- Right Content Area -->
+            <div class="col-xl-9 col-lg-8">
+                <div class="row g-4">
+                    <!-- Main Content Column -->
+                    <div class="col-xl-8">
+                        <div class="glass-panel mb-4">
+                            <div class="d-flex justify-content-between align-items-start flex-wrap">
+                                <div>
+                                    <h6 class="panel-title">Data Exchange</h6>
+                                    <div class="kpi-container d-flex align-items-center mt-3">
+                                        <div class="kpi-item me-4">
+                                            <span class="kpi-value text-glow-green" id="kpiInput"></span>
+                                            <span class="kpi-label">Input</span>
+                                            <span class="badge bg-success-soft ms-2" id="kpiInputTrend"></span>
+                                        </div>
+                                        <div class="kpi-item">
+                                            <span class="kpi-value text-glow-orange" id="kpiOutput"></span>
+                                            <span class="kpi-label">Output</span>
+                                            <span class="badge bg-danger-soft ms-2" id="kpiOutputTrend"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="btn-group chart-filter-group mt-3 mt-sm-0" id="dataExchangeFilter">
+                                    <button type="button" class="btn btn-sm btn-filter" data-period="month">Month</button>
+                                    <button type="button" class="btn btn-sm btn-filter" data-period="quarter">Quarter</button>
+                                    <button type="button" class="btn btn-sm btn-filter active" data-period="year">Year</button>
+                                </div>
+                            </div>
+                            <div class="panel-content" style="height: 375px;"><canvas id="dataExchangeChart"></canvas></div>
+                        </div>
+
+                        <!-- Exchange Details Row (C7) -->
+                        <div class="row g-4 mb-4" id="exchangeDetails">
+                            <!-- JS will populate this -->
+                        </div>
+
+                        <!-- Status Donuts Row (C8 & C9) -->
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="glass-panel text-center h-100">
+                                    <div class="chart-container" style="height: 90px;"><canvas id="succeedChart"></canvas></div>
+                                    <div id="succeedText" class="status-text-below"></div>
+                                    <div id="succeedFeed" class="status-feed"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="glass-panel text-center h-100">
+                                    <div class="chart-container" style="height: 90px;"><canvas id="failChart"></canvas></div>
+                                    <div id="failText" class="status-text-below"></div>
+                                    <div id="failFeed" class="status-feed"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="glass-panel text-center h-100">
+                                    <div class="chart-container" style="height: 90px;"><canvas id="exchangingChart"></canvas></div>
+                                    <div id="exchangingText" class="status-text-below"></div>
+                                    <div id="exchangingFeed" class="status-feed"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Far Right Sidebar Column -->
+                    <div class="col-xl-4">
+                        <div class="glass-panel mb-4">
+                             <h6 class="panel-title">Last</h6>
+                             <div class="last-cert-info">
+                                 <p class="cert-title text-glow-blue">Supervisor Engineer Certificate</p>
+                                 <p class="cert-subtitle">Department of Build</p>
+                                 <p class="cert-meta">Interface of Certificate Apply</p>
+                                 <p class="cert-date">2019-08-...</p>
+                             </div>
+                        </div>
+                        <div class="glass-panel mb-4">
+                            <h6 class="panel-title">Catalog Status</h6>
+                            <div class="chart-container" style="height: 150px;"><canvas id="catalogStatusChart"></canvas></div>
+                        </div>
+                        <div class="glass-panel">
+                             <h6 class="panel-title">Interfaces Rank</h6>
+                             <div class="panel-content" id="interfacesRankContainer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
