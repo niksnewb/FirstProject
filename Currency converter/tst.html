@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Containers Demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container overflow-hidden">
+  <div class="row gy-1">
+    <div class="col-6">
+      <div class="p-3 border bg-light">Custom column padding</div>
+    </div>
+    <div class="col-6">
+      <div class="p-3 border bg-light">Custom column padding</div>
+    </div>
+    <div class="col-6">
+      <div class="p-3 border bg-light">Custom column padding</div>
+    </div>
+    <!-- <div class="col-6">
+      <div class="p-3 border bg-light">Custom column padding</div>
+    </div> -->
+  </div>
+</div>
+
+  <div class="container my-4">
+    <!-- <h2 class="text-center text-primary">Bootstrap Containers Demo</h2>
+    <p class="text-center text-muted">Compare <code>.container</code>, <code>.container-fluid</code>, and <code>.container-{breakpoint}</code></p> -->
+  </div>
+
+  <!-- Fixed Container -->
+  <div class="container bg-info text-white p-3 mb-4">
+    <h4>.container (Fixed Width)</h4>
+    <p>This container has a maximum width depending on screen size.</p>
+  </div>
+
+  <!-- Fluid Container -->
+  <div class="container-fluid bg-success text-white p-3 mb-4">
+    <h4>.container-fluid (Full Width)</h4>
+    <p>This container always takes up the full width of the screen.</p>
+  </div>
+
+  <!-- Breakpoint Container -->
+  <div class="container-md bg-warning text-dark p-3 mb-4">
+    <h4>.container-md (Responsive)</h4>
+    <p>This container is fluid until screen ≥768px, then becomes fixed.</p>
+  </div>
+
+  <div class="container text-center my-5">
+    <p class="text-muted">Resize the browser window 🔍 to see how each container behaves.</p>
+  </div>
+
+<div class="container my-4">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="">
+        <div class="card-body">
+          <h5 class="card-title">Card 1</h5>
+          <p class="card-text">Some text inside card 1.</p>
+          <a href="#" class="btn btn-primary">View</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="">
+        <div class="card-body">
+          <h5 class="card-title">Card 2</h5>
+          <p class="card-text">Some text inside card 2.</p>
+          <a href="#" class="btn btn-primary">View</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="">
+        <div class="card-body">
+          <h5 class="card-title">Card 3</h5>
+          <p class="card-text">Some text inside card 3.</p>
+          <a href="#" class="btn btn-primary">View</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="width: 20rem;">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <span>Card with Dropdown</span>
+    
+    <!-- Dropdown -->
+    <div class="dropdown">
+      <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+        Actions
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li><a class="dropdown-item" href="#">Edit</a></li>
+        <li><a class="dropdown-item" href="#">Delete</a></li>
+        <li><a class="dropdown-item" href="#">Share</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="card-body">
+    <h5 class="card-title">Dropdown inside Card</h5>
+    <p class="card-text">This card has a dropdown menu in its header for quick actions.</p>
+  </div>
+</div>
+
+<div class="card" style="width: 20rem;">
+  <div class="card-body">
+    <h5 class="card-title">Card with Dropdown in Body</h5>
+    <p class="card-text">You can also place a dropdown inside the card body.</p>
+
+    <!-- Dropdown -->
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+        Options
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">View</a></li>
+        <li><a class="dropdown-item" href="#">Download</a></li>
+        <li><a class="dropdown-item" href="#">Archive</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+        /* Enable hover dropdowns only on large screens and up */
+        @media (min-width: 992px) {
+
+            /* Show dropdowns on hover */
+            .navbar .dropdown:hover .dropdown-menu {
+                display: block;
+                margin-top: 0;
+                /* Remove the gap so it doesn't close */
+            }
+
+            /* Center title inside navbar */
+            .navbar .container-fluid {
+                position: relative;
+            }
+
+            .navbar-title {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                margin: 0;
+                /* white-space: nowrap; */
+                /* prevents wrapping */
+            }
+        }
+
+        body {
+            background-image: url('https://reports.ongc.co.in/documents/59362/2670674/digitalThumb.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /* Keeps the background fixed when scrolling */
+            color: #fff;
+            /* Setting a default text color for the page */
+        }
+
+        .main-content-bg {
+            padding-top: 0;
+            padding-bottom: 2rem;
+            /* Background properties moved to the body */
+        }
+
+
+        .navbar {
+            background-color: rgba(10, 26, 71, 0.3) !important;
+            /* Dark blue to match the image theme */
+        }
+
+        .navbar .navbar-brand,
+        .navbar .nav-link {
+            color: #e0e0e0;
+        }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link:focus {
+            color: #ffffff;
+        }
+
+        .navbar .dropdown-menu {
+            min-width: 8rem;
+            /* Adjust this value as needed, default is 10rem */
+            background-color: #2c3755;
+            /* Dark background to match theme */
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .navbar .dropdown-item {
+            color: #e0e0e0;
+        }
+
+        .navbar .dropdown-item:hover,
+        .navbar .dropdown-item:focus {
+            color: #ffffff;
+            background-color: #52899e;
+            /* Using the highlight color from your other styles */
+        }
+
+        /* Style for the mobile menu toggle button */
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        .daterangepicker {
+            width: 27%;
+            padding: 10px;
+            background: rgba(203, 223, 243, 0.98) !important;
+            color: #0e0000 !important;
+            border: 1px solid rgba(255, 255, 255, 0.06) !important;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45) !important;
+            position: absolute;
+            left: 10% !important;
+            top: auto !important;
+        }
+
+
+        /* Mobile-friendly daterangepicker */
+        @media (max-width: 767px) {
+            .daterangepicker {
+                position: absolute !important;
+                left: 0 !important;
+                right: 0 !important;
+                width: 100% !important;
+                max-width: none !important;
+                margin-top: 4px !important;
+                /* little gap under input */
+            }
+
+            .daterangepicker .drp-calendar {
+                float: none !important;
+                width: 100% !important;
+            }
+
+            .daterangepicker .drp-calendar.left,
+            .daterangepicker .drp-calendar.right {
+                clear: both !important;
+            }
+        }
+
+
+        #status-table {
+            opacity: 0.9;
+        }
+
+        #status-table tr:hover td {
+            background-color: rgba(133, 163, 240, 0.9) !important;
+        }

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator Module</title>
+    <link rel="stylesheet" href="QRGen.css">
+</head>
+<body>
+    <div class="back"> 
+        <a href="../index.html">Back</a>
+    </div>
+    <div class="container">
+        <P> Enter text to Generate QR Code</P>
+        <input type="text" placeholder="Enter Text" id="inputText">
+
+        <div id="imgBox">
+            <img src="" id="QRimg">
+        </div>
+        <button onclick="generateQR()">Generate QR Code</button>
+    </div>    
+
+    <script src="QRGen.js"></script>
+</body>
+</html>
