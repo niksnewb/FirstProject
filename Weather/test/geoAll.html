@@ -78,6 +78,7 @@
           <th>Altitude Accuracy (m)</th>
           <th>Heading (°)</th>
           <th>Speed (m/s)</th>
+          <th>Map Link </th>
         </tr>
       </thead>
       <tbody>
@@ -103,6 +104,7 @@
           <th>Altitude Accuracy (m)</th>
           <th>Heading (°)</th>
           <th>Speed (m/s)</th>
+          <th>Map Link </th>
         </tr>
       </thead>
       <tbody id="historyBody">
@@ -134,6 +136,7 @@
         <td>${coords.altitudeAccuracy !== null ? coords.altitudeAccuracy : "N/A"}</td>
         <td>${coords.heading !== null ? coords.heading : "N/A"}</td>
         <td>${coords.speed !== null ? coords.speed : "N/A"}</td>
+        <td><a href="https://www.google.com/maps/@${coords.latitude},${coords.longitude},15z" target="_blank">Map</a></td>
       `;
     }
 
@@ -156,6 +159,7 @@
         <td>${coords.altitudeAccuracy !== null ? coords.altitudeAccuracy : "N/A"}</td>
         <td>${coords.heading !== null ? coords.heading : "N/A"}</td>
         <td>${coords.speed !== null ? coords.speed : "N/A"}</td>
+        <td><a href="https://www.google.com/maps/@${coords.latitude},${coords.longitude},15z" target="_blank">Map</a></td>
       `;
       historyBody.prepend(row); // latest first
     }
