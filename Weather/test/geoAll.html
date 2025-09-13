@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Automatic Geolocation Tracking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 10px;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .table-container {
+      overflow-x: auto; /* horizontal scroll on small screens */
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      min-width: 700px; /* prevent table from squashing too much */
+    }
+
+    th, td {
+      border: 1px solid #444;
+      padding: 6px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    th {
+      background: #f0f0f0;
+      font-weight: bold;
+    }
+
+    .status {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 10px;
+      padding: 8px;
+      border-radius: 5px;
+    }
+
+    .tracking {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .error {
+      background: #f44336;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h2>Live Geolocation Tracking</h2>
+  <div id="status" class="status">Initializing...</div>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Watch ID</th>
+          <th>Timestamp</th>
+          <th>Latitude (°)</th>
+          <th>Longitude (°)</th>
+          <th>Altitude (m)</th>
+          <th>Accuracy (m)</th>
+          <th>Altitude Accuracy (m)</th>
+          <th>Heading (°)</th>
+          <th>Speed (m/s)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Live Row -->
+        <tr id="liveRow">
+          <td colspan="9" style="text-align:center;color:gray">Waiting for location...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>History Log</h3>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Watch ID</th>
+          <th>Timestamp</th>
+          <th>Latitude (°)</th>
+          <th>Longitude (°)</th>
+          <th>Altitude (m)</th>
+          <th>Accuracy (m)</th>
+          <th>Altitude Accuracy (m)</th>
+          <th>Heading (°)</th>
+          <th>Speed (m/s)</th>
+        </tr>
+      </thead>
+      <tbody id="historyBody">
+        <tr>
+          <td colspan="9" style="text-align:center;color:gray">No history yet</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    let watchId = null;
+    let lastPosition = null;
+
+    const statusEl = document.getElementById("status");
+    const liveRow = document.getElementById("liveRow");
+    const historyBody = document.getElementById("historyBody");
+
+    function updateLiveRow(position) {
+      const coords = position.coords;
+
+      liveRow.innerHTML = `
+        <td>${watchId}</td>
+        <td>${new Date(position.timestamp)}</td>
+        <td>${coords.latitude}</td>
+        <td>${coords.longitude}</td>
+        <td>${coords.altitude !== null ? coords.altitude : "N/A"}</td>
+        <td>±${coords.accuracy}</td>
+        <td>${coords.altitudeAccuracy !== null ? coords.altitudeAccuracy : "N/A"}</td>
+        <td>${coords.heading !== null ? coords.heading : "N/A"}</td>
+        <td>${coords.speed !== null ? coords.speed : "N/A"}</td>
+      `;
+    }
+
+    function logToHistory(position) {
+      const coords = position.coords;
+
+      // remove "No history yet" if first entry
+      if (historyBody.children[0] && historyBody.children[0].cells.length === 1) {
+        historyBody.innerHTML = "";
+      }
+
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${watchId}</td>
+        <td>${new Date(position.timestamp).toLocaleTimeString()}</td>
+        <td>${coords.latitude}</td>
+        <td>${coords.longitude}</td>
+        <td>${coords.altitude !== null ? coords.altitude : "N/A"}</td>
+        <td>±${coords.accuracy}</td>
+        <td>${coords.altitudeAccuracy !== null ? coords.altitudeAccuracy : "N/A"}</td>
+        <td>${coords.heading !== null ? coords.heading : "N/A"}</td>
+        <td>${coords.speed !== null ? coords.speed : "N/A"}</td>
+      `;
+      historyBody.prepend(row); // latest first
+    }
+
+    function updateRow(position) {
+      const coords = position.coords;
+
+      // detect change
+      if (!lastPosition || 
+          coords.latitude !== lastPosition.latitude ||
+          coords.longitude !== lastPosition.longitude ||
+          coords.accuracy !== lastPosition.accuracy ||
+          coords.altitude !== lastPosition.altitude ||
+          coords.altitudeAccuracy !== lastPosition.altitudeAccuracy ||
+          coords.heading !== lastPosition.heading ||
+          coords.speed !== lastPosition.speed) {
+        
+        updateLiveRow(position);
+        logToHistory(position);
+
+        lastPosition = { ...coords }; // store copy
+      }
+    }
+
+    function showError(error) {
+      statusEl.textContent = "Error: " + error.message;
+      statusEl.className = "status error";
+      liveRow.innerHTML = `<td colspan="9" style="color:red">${error.message}</td>`;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (navigator.geolocation) {
+        watchId = navigator.geolocation.watchPosition(updateRow, showError, {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0
+        });
+        statusEl.textContent = "Tracking...";
+        statusEl.className = "status tracking";
+      } else {
+        statusEl.textContent = "Geolocation not supported";
+        statusEl.className = "status error";
+      }
+    });
+  </script>
+</body>
+</html>
